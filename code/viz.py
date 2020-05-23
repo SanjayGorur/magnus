@@ -10,7 +10,7 @@ def make_plot(white_moves, black_moves):
                         subplot_titles=('White', 'Black'))
     
     fig.add_trace(go.Sunburst(
-        name='White',
+        name='M is white',
         ids=white_moves['ids'],
         labels=white_moves['labels'],
         parents=white_moves['parents'],
@@ -26,7 +26,7 @@ def make_plot(white_moves, black_moves):
         row=1, col=1)
     
     fig.add_trace(go.Sunburst(
-        name='Black',
+        name='M is black',
         ids=black_moves['ids'],
         labels=black_moves['labels'],
         parents=black_moves['parents'],

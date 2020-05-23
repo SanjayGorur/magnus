@@ -5,7 +5,7 @@ I'm a beginner in python so some code is ugly and i don't know how to make it be
 
 
 ### Results:
-[Interactive plot is here](https://drive.google.com/open?id=1gIK7t7IxSLY8aJWmSCmn7UOSHVXaVqsB)
+[Interactive plot is here](https://chart-studio.plotly.com/~Musatov/1.embed)
 
 <img src="White.jpeg"/>
 
