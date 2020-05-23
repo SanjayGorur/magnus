@@ -1,13 +1,10 @@
-import os
-os.chdir('/home/musatov/Documents/dscience/magnus/new') 
-
 from data_processing_funs import parse_data, preprocess_data
 from data_processing_funs import prepare_data_to_viz, add_color
 from viz import make_plot, write_fig
 from plotly.offline import plot
 
 
-with open('carlsen.pgn', 'r') as f:
+with open('../data/carlsen.pgn', 'r') as f:
     text = f.read()
     
 data = parse_data(text)
