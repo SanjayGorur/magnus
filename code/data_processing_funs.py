@@ -82,33 +82,43 @@ def prepare_data_to_viz(data):
     # first move
     moves = pd.DataFrame({'ids':data['1_move'], 
                           'labels':data['1_move'], 
-                          'parents':''})
+                          'parents':'',
+                          'result':data['magnus_result']})
     
     # add second move
     moves = pd.concat([moves, pd.DataFrame({'ids':data['1_move'] +'-'+ data['2_move'],
                                    'labels':data['2_move'],
-                                   'parents':data['1_move']})])
+                                   'parents':data['1_move'],
+                                   'result':data['magnus_result']})])
     
     # add third move
     moves = pd.concat([moves, pd.DataFrame({'ids':data['1_move'] +'-'+ data['2_move'] +'-'+ data['3_move'],
                                             'labels':data['3_move'],
-                                            'parents':data['1_move'] +'-'+ data['2_move']})])
+                                            'parents':data['1_move'] +'-'+ data['2_move'],
+                                            'result':data['magnus_result']})])
     
     # add fourth move
     moves = pd.concat([moves, pd.DataFrame({'ids':data['1_move'] +'-'+ data['2_move'] +'-'+ data['3_move'] +'-'+ data['4_move'],
                                             'labels':data['4_move'],
-                                            'parents':data['1_move'] +'-'+ data['2_move'] +'-'+ data['3_move']})])
+                                            'parents':data['1_move'] +'-'+ data['2_move'] +'-'+ data['3_move'],
+                                            'result':data['magnus_result']})])
     
     # add fifth move
     moves = pd.concat([moves, pd.DataFrame({'ids':data['1_move'] +'-'+ data['2_move'] +'-'+ data['3_move'] +'-'+ data['4_move'] +'-'+ data['5_move'],
                                             'labels':data['5_move'],
-                                            'parents':data['1_move'] +'-'+ data['2_move'] +'-'+ data['3_move'] +'-'+ data['4_move']})])
-
+                                            'parents':data['1_move'] +'-'+ data['2_move'] +'-'+ data['3_move'] +'-'+ data['4_move'],
+                                            'result':data['magnus_result']})])
+    
+    moves['counts'] = 1
+    results = moves.groupby(['ids', 'result'], as_index=False)['counts'].count()
+    results = results.pivot_table(values='counts', columns='result', index='ids', fill_value=0)
+    results['id'] = results.index
     
     moves['values'] = 1
     moves_count = moves.groupby('ids', as_index=False).agg({'values':'count'})
     moves = moves.drop('values', axis=1).drop_duplicates('ids').reset_index(drop=True)
     
+    moves = moves.merge(results, left_on='ids', right_on='id')
     moves = moves.merge(moves_count)    
     
     return moves

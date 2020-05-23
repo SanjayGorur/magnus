@@ -18,7 +18,10 @@ def make_plot(white_moves, black_moves):
         branchvalues="total",
         opacity=1,
         marker={'colors':white_moves['color'], 'line':{'color':'#000200'}},
-        hoverinfo='label+text+value+name+current path'
+        hoverinfo='label+text+name+current path+value',
+        hovertext='Win: ' + white_moves['win'].apply(str) + 
+                  '\nDraw: ' + white_moves['draw'].apply(str) + 
+                  '\nLose: ' + white_moves['lose'].apply(str)
         ), 
         row=1, col=1)
     
@@ -31,7 +34,10 @@ def make_plot(white_moves, black_moves):
         branchvalues="total",
         opacity=1,
         marker={'colors':black_moves['color'], 'line':{'color':'#000200'}},
-        hoverinfo='label+text+value+name+current path'
+        hoverinfo='label+text+name+current path+value',
+        hovertext='Win: ' + black_moves['win'].apply(str) + 
+                  '\nDraw: ' + black_moves['draw'].apply(str) + 
+                  '\nLose: ' + black_moves['lose'].apply(str)
         ),
         row=1, col=2)
     
