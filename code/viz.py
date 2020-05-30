@@ -1,7 +1,7 @@
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-from plotly.offline import plot
 import plotly.io as io
+import chart_studio
 
 
 def make_plot(white_moves, black_moves):
@@ -58,5 +58,12 @@ def make_plot(white_moves, black_moves):
 
 def write_fig(fig):
     io.orca.config.executable = '/home/musatov/Applications/orca.AppImage'
-    fig.write_image('fig.svg')
+    fig.write_image('fig.pdf')
+    
+def upload_fig(fig, username, api_key):
+    chart_studio.tools.set_credentials_file(username=username, api_key=api_key)
+    chart_studio.tools.set_config_file(sharing='public')
+
+    chart_studio.plotly.plot(fig, filename = 'Magnus', auto_open=False)
+    
     

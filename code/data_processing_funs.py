@@ -67,7 +67,7 @@ def magnus_result(game):
 def preprocess_data(data):
     data['date'] = pd.to_datetime(data['date'], errors='coerce')
     
-    data = data.loc[data['date'] > pd.to_datetime('2013-11-22')].reset_index(drop=True) # choose only champion games
+    data = data.loc[data['date'] > pd.to_datetime('2013-11-22')].reset_index(drop=True) # choose games since M became champion
     
     data.insert(3, 'weekday', data['date'].apply(lambda x: x.day_name()))
     
